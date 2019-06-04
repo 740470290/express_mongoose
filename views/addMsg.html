@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../public/favicon.ico" type="image/x-icon"/>
+    <title>添加留言</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .container{
+            position: relative;
+        }
+        .user{
+            font-size: 20px;
+            position: absolute;
+            right: 110px;
+            top:10px;
+        }
+        .photo{
+            position: absolute;
+            right: 220px;
+            top:10px;
+            width: 100px;
+            height: 80px;
+        }
+        .myPic{
+            font-size: 17px;
+            position: absolute;
+            right: 330px;
+            top:10px;
+        }
+        .exit{
+            font-size: 20px;
+            position: absolute;
+            right: 30px;
+            top:10px;
+        }
+        #content{
+            resize: none;
+        }
+        .pull-right{
+            margin: 0 10px;
+        }
+        .list-group-item{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container header">
+    {{each photos p index}}
+    {{if p.name==username}}
+    <img class="photo" src={{p.photo}} alt="">
+    {{/if}}
+    {{/each}}
+    <a href="moPic" class="myPic">修改头像</a>
+    <span class="user">用户:{{username}}</span>
+        <a class="exit" href="/logout">
+            退出
+        </a>
+    <div class="page-header">
+        <h1>添加留言</h1>
+        <a href="/stu">
+            <button class="btn btn-success">返回首页</button>
+        </a>
+    </div>
+    <div class="comments container">
+        <form action="/postMsg" method="post" onsubmit="return check()">
+            <div class="form-group">
+                <label for="content">留言内容</label>
+                <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <input type="submit" class="btn btn-default">
+        </form>
+    </div>
+    <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <% for(var i=1;i<=len;i++){ %>
+    <li><a class="skip" href="#"><%=i%></a></li>
+    <% } %>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+    <div class="comments container">
+        <ul class="list-group">
+            {{each msgs msg index}}
+            <li class="list-group-item">
+                {{each photos p index}}
+                {{if p.name==msg.name}}
+                <img src={{p.photo}} alt="" height="30" width="40">
+                {{/if}}
+                {{/each}}
+                {{msg.name}}: {{msg.msg}}
+                {{if msg.name==username}}
+                <a class="pull-right" href="/delMsg/{{msg.id}}">删除</a>
+                <a class="pull-right modify" href="/modMsg?id={{msg.id}}">修改</a>
+                {{/if}}
+                <span class="pull-right">{{msg.msgDate}}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+</div>
+<script src="../public/ajax.min.js"></script>
+<script charset="utf-8">
+    // var aa=JSON.parse('{{msgs}}'.replace(/&#34;/g,'\"'))
+    const del=document.querySelectorAll('.pull-right');
+    const list=document.querySelectorAll('.list-group-item');
+    const skip=document.querySelectorAll('.skip');
+    const len=list.length;
+    const modify=document.querySelector('.modify');
+    const pag=document.querySelector('.pagination');
+    function check() {
+        const content = document.getElementById('content').value.trim();
+        if (content.length < 3 || content.length > 30) {
+            return false
+        }
+        return true
+    }
+    for(i of del){
+        i.onclick=function (e) {
+            e.preventDefault();
+            this.parentElement.style.display='none';
+            $.get(this.href,function (res) {
+                console.log(res)
+            })
+        }
+    }
+    modify.onclick=function (e) {
+        e.preventDefault();
+        const a=prompt('输入要修改的内容');
+        if(a) location.href=this.href+'&content='+a;
+    }
+    for(let i of skip){
+        i.onclick=function (e) {
+            e.preventDefault();
+            for(k of list){
+                k.style.display='none';
+            }
+            let n=parseInt(this.innerHTML)-1;
+            for(o=5*n;o<(((n+1)*5)>len?len:((n+1)*5));o++){
+                list[o].style.display='block';
+            }
+        }
+    }
+    window.onload=function () {
+        for(let j=0;j<5;j++){
+        list[j].style.display='block';
+    }
+    }
+</script>
+</body>
+</html>

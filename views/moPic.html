@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<form action="/moPic" method="post" enctype="multipart/form-data" onsubmit="return check()">
+     <div class="custom-file">
+    <input required type="file" accept="image/*" name="pic" class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+</div>
+    <input class="btn btn-success" type="submit" value="上传">
+</form>
+</div>
+<script>
+    function check(){
+        return document.querySelector('#customFile').value?true:false
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../public/favicon.ico" type="image/x-icon" />
+    <title>商品</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .container{
+            position: relative;
+        }
+        .user{
+            font-size: 20px;
+            position: absolute;
+            right: 110px;
+            top:10px;
+        }
+        .exit{
+            font-size: 20px;
+            position: absolute;
+            right: 30px;
+            top:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container header">
+        <div class="page-header">
+            <button class="btn btn-success">进货</button>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table table-striped table-hover table-responsive">
+                <thead>
+                    <th>产品编号</th>
+                    <th>产品名称</th>
+                    <th>单价</th>
+                    <th>库存</th>
+                    <th>操作</th>
+                </thead>
+                <tbody>
+                {{each msgs msg index}}
+                    <tr>
+                        <th scope="row">{{msg.id}}</th>
+                        <td>{{msg.name}}</td>
+                        <td>{{msg.price}}</td>
+                        <td>{{msg.number}}</td>
+                        <td>
+                            <a href="#">修改</a>
+                            <a href="/delCom/{{msg.id}}">删除</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="add">
+            <form action="/add" method="post" onsubmit="return check()">
+            <div class="form-group">
+                <label for="id">产品编号</label>
+                <input type="text" class="form-control" name="id" id="id">
+            </div>
+                <div class="form-group">
+                <label for="name">产品名称</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+            <div class="form-group">
+                <label for="price">单价</label>
+                <input type="text" class="form-control" name="price" id="price">
+            </div>
+            <div class="form-group">
+                <label for="number">库存</label>
+                <input type="text" class="form-control" name="number" id="number">
+            </div>
+            <input type="submit" value="添加/修改" class="btn btn-success">
+        </form>
+        </div>
+        </div>
+    <script>
+    function check() {
+        const inputs=document.querySelectorAll('input');
+        if(inputs[0].value.trim()==''||inputs[1].value.trim()==''||inputs[2].value.trim()==''||inputs[3].value.trim()==''){
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

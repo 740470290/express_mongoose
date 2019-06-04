@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /*#app,#myDiv{*/
+        /*height: 2000px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<form action="" novalidate>
+    <input type="text" size="5" minlength="5" id="d1">
+    <select name="location" id="">
+        <option value="123">123</option>
+        <option>456</option>
+    </select>
+    <input type="submit">
+</form>
+
+<button id="d2" align="right">百度一下</button>
+<div dir="rtl" align="right">1234</div>
+<h3 id="myBtn" class="c1 c2" data-chen="123">1234</h3>
+<div id="myDiv"><!--A comment --></div>
+
+
+<script>
+d1.onchange=function () {
+    console.log(this.value)
+}
+d1.onfocus=function () {
+    this.select()
+}
+d1.onselect=function () {
+    console.log(123)
+}
+
+</script>
+</body>
+</html>

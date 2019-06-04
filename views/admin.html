@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../public/favicon.ico" type="image/x-icon" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .container{
+            position: relative;
+        }
+        .user{
+            font-size: 20px;
+            position: absolute;
+            right: 100px;
+            top:10px;
+        }
+        .exit{
+            font-size: 20px;
+            position: absolute;
+            right: 20px;
+            top:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container header">
+        <span class="user">用户:{{username}}</span>
+        <a class="exit" href="/logout">
+            退出
+        </a>
+        <div class="page-header">
+            <h1>学生列表</h1>
+            <a href="/stu/create"><button type="button" class="btn btn-success">添加学生</button></a>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">学生列表</div>
+            <table class="table table-striped table-hover table-responsive">
+                <thead>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>密码</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>添加时间</th>
+                    <th width="120">操作</th>
+                </thead>
+                <tbody>
+                {{each msgs msg index}}
+                    <tr>
+                        <th scope="row">{{msg.id}}</th>
+                        <td>{{msg.name}}</td>
+                        <td>{{msg.pwd}}</td>
+                        <td>{{msg.age}}</td>
+                        <td>{{msg.sex}}</td>
+                        <td>{{msg.date}}</td>
+                        <td>
+                            <a href="#">详情</a>
+                            <a href="#">修改</a>
+                            <a href={{'/del?id='+msg.id}}>删除</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
