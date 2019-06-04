@@ -12,6 +12,7 @@ const user=db.models.User;
 const msg=db.models.Msg;
 const formidable=require('formidable');
 const gm=require('gm');
+const md5=require('../model/myMd5').myMd5;
 
 
 router.get('/login', function (req, res) {
@@ -206,7 +207,7 @@ router.post('/login', function (req, res) {
     db.find(user,{name:req.body.name},function(err, result) { // 返回集合中所有数据
         if (err) throw err;
         if(result.length===0){return res.send('用户名错误')}
-        if(result[0].pwd==req.body.pwd){
+        if(result[0].pwd==md5(req.body.pwd)){
             req.session.isLogin=true;
             req.session.userInfo=result[0].name;
             res.cookie("name",result[0].name,{maxAge: 1e10, httpOnly: true});

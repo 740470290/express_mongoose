@@ -27,7 +27,7 @@
                 }
             }
         },
-        jsonp: function jsonp(u, c) {
+        jsonp: function (u, c) {
             const n = "jsonp" + Math.random().toString().slice(2);
             const s = document.createElement("script");
             const h = document.head;
