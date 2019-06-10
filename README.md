@@ -1,2 +1,3 @@
 # express_student_list
-基于express的学生列表增删改查
+基于express的留言板案例,数据库是MongoDB,连接的框架是mongoose,数据库名runoob
+上传头像功能
