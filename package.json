@@ -7,7 +7,7 @@
     "express-session": "^1.16.1",
     "formidable": "^1.2.1",
     "gm": "^1.23.1",
-    "jquery": "^1.9.1",
+    "jquery": "^3.4.1",
     "md5": "^2.2.1",
     "mongodb": "^3.2.6",
     "mongoose": "^5.5.11",
